@@ -1,0 +1,23 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+<title>Platzigram Sing Up</title>
+{% endblock %}
+
+{% block container %}
+    {% if error %}
+        <p class="alert alert-danger">{{ error }}</p>
+    {% endif %}
+
+<h1>Sing Up</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button class="btn btn-primary btn-block mt-5" type="submit">Sing In</button>
+
+
+    </form>
+
+{% endblock %}
