@@ -2,6 +2,7 @@
 
 # Django
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -19,6 +20,9 @@ from users.models import Profile
 #forms
 from users.forms import ProfileForm, SignupForm
 
+class LoginView(auth_views.LoginView):
+    """Login view"""
+    template_name= "users/login.html"
 
 def login_view(request):
     """Login view."""
@@ -33,6 +37,9 @@ def login_view(request):
             return render(request, 'users/login.html', {'error': 'Invalid username or password'})
 
     return render(request, 'users/login.html')
+
+class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
+    """Logaut View"""
 
 @login_required
 def logout_view(request):
